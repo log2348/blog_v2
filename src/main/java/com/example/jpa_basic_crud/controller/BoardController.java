@@ -30,7 +30,7 @@ public class BoardController {
 
 		// 서비스 접근해서 목록 가져와야 된다.
 		Page<Board> boards = boardService.글목록보기(pageable);
-		model.addAttribute("boards", boardService.글목록보기(pageable));
+		model.addAttribute("boards", boardService.글목록보기(pageable)); // key, value
 		return "list";
 	}
 
