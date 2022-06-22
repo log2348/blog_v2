@@ -21,10 +21,23 @@ public class BoardService {
 		Board boardEntity = BoardSaveRequestDto.toEntity(dto);
 		boardRepository.save(boardEntity);
 	}
-	
+
 	@Transactional
-	public Page<Board> 글목록보기(Pageable pageable) {		
+	public Page<Board> 글목록보기(Pageable pageable) {
 		return boardRepository.findAll(pageable);
+	}
+
+	@Transactional
+	public Board 글상세보기(int id) {
+
+		Board board = boardRepository.findById(id).orElseThrow(() -> {
+			return new RuntimeException("해당 글은 삭제되었습니다.");
+		});
+		
+		// 더티 체킹 = 조회수 증가
+		board.setReadCount(board.getReadCount() + 1);
+
+		return board;
 	}
 
 }
