@@ -53,5 +53,11 @@ public class BoardService {
 		// boardRepository.save(boardEntity);		
 		// 트랜잭션 처리 --> 글 수정하기() 메서드가 종료되는 시점에 더티 체킹 발생
 	}
+	
+	@Transactional
+	public int 글삭제하기(int id) {
+		// 삭제되든 말든 무조건 ok 처리 되기 때문에 리턴타입 void
+		return boardRepository.mDeleteById(id);
+	}
 
 }

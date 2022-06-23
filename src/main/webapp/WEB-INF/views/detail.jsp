@@ -31,7 +31,7 @@
 		})
 		.then(res => res.text())
 		.then(res => {
-			if(res == "ok") {
+			if(res == "true") {
 				alert("삭제 성공");
 				location.href = "/"
 			} else {
