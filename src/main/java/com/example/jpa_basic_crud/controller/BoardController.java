@@ -65,7 +65,7 @@ public class BoardController {
 	@GetMapping("/board/{id}")
 	public String detail(@PathVariable int id, Model model) {
 		// 서비스에 가서 데이터 가져오기
-		boardService.글상세보기(id);
+		// boardService.글상세보기(id);
 		model.addAttribute("board", boardService.글상세보기(id));
 		return "detail";
 	}
@@ -92,6 +92,7 @@ public class BoardController {
 	@ResponseBody
 	public boolean deleteBoard(@PathVariable int id) {
 		boolean result = boardService.글삭제하기(id) == 1 ? true : false;
+		System.out.println("result : " + result);
 		return result;
 	}
 

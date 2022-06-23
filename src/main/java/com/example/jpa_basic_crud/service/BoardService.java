@@ -30,13 +30,12 @@ public class BoardService {
 	@Transactional
 	public Board 글상세보기(int id) {
 
-		Board board = boardRepository.findById(id).orElseThrow(() -> {
-			return new RuntimeException("해당 글은 삭제되었습니다.");
+		Board board = boardRepository.mFindById(id).orElseThrow(() -> {
+			return new RuntimeException("id 값이 잘못 들어왔습니다.");
 		});
 		
 		// 더티 체킹 = 조회수 증가
 		board.setReadCount(board.getReadCount() + 1);
-
 		return board;
 	}
 	
@@ -56,7 +55,8 @@ public class BoardService {
 	
 	@Transactional
 	public int 글삭제하기(int id) {
-		// 삭제되든 말든 무조건 ok 처리 되기 때문에 리턴타입 void
+		// deleteById - 삭제되든 말든 무조건 ok 처리 되기 때문에 리턴타입 void
+		System.out.println("글 삭제하기 mDeleteById : " + boardRepository.mDeleteById(id)); // 삭제 성공시 1
 		return boardRepository.mDeleteById(id);
 	}
 

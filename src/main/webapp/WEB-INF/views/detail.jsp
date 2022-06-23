@@ -29,11 +29,11 @@
 		fetch("/board/" + id, {
 			method: "delete"
 		})
-		.then(res => res.text())
+		.then(res => res.text()) // 텍스트로 변환
 		.then(res => {
 			if(res == "true") {
 				alert("삭제 성공");
-				location.href = "/"
+				location.href = "/";
 			} else {
 				alert("삭제 실패");
 			}
