@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -66,6 +67,24 @@ public class BoardController {
 		boardService.글상세보기(id);
 		model.addAttribute("board", boardService.글상세보기(id));
 		return "detail";
+	}
+	
+	@GetMapping("/updateForm/{id}")
+	public String updateForm(@PathVariable int id, Model model) {
+		Board board = boardService.글상세보기(id);
+		model.addAttribute("board", board);
+		return "updateForm";
+	}
+	
+	// 글 수정 주소 설계
+	// 스프링의 기본 파싱 전략 -> key-value
+	// @RequestBody - messageConverter가 자동으로 파싱해서 오브젝트로 만들어준다
+	@PutMapping("/board/{id}")
+	@ResponseBody // 데이터 리턴
+	public String updateBoard(@PathVariable int id, @RequestBody BoardSaveRequestDto dto) {
+		// 서비스, 더티체킹, 영속성 이용
+		boardService.글수정하기(id, dto);		
+		return "ok";
 	}
 
 }

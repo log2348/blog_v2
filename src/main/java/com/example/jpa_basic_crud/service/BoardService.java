@@ -39,5 +39,19 @@ public class BoardService {
 
 		return board;
 	}
+	
+	@Transactional
+	public void 글수정하기(int id, BoardSaveRequestDto dto) {
+		// 가져오기
+		Board boardEntity = boardRepository.findById(id).orElseThrow(() -> {
+			return new RuntimeException("해당 글은 존재하지 않습니다.");
+		});
+		
+		boardEntity.setTitle(dto.getTitle());
+		boardEntity.setContent(dto.getContent());
+		
+		// boardRepository.save(boardEntity);		
+		// 트랜잭션 처리 --> 글 수정하기() 메서드가 종료되는 시점에 더티 체킹 발생
+	}
 
 }
