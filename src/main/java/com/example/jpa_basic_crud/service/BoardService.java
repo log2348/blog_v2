@@ -56,7 +56,6 @@ public class BoardService {
 	@Transactional
 	public int 글삭제하기(int id) {
 		// deleteById - 삭제되든 말든 무조건 ok 처리 되기 때문에 리턴타입 void
-		System.out.println("글 삭제하기 mDeleteById : " + boardRepository.mDeleteById(id)); // 삭제 성공시 1
 		return boardRepository.mDeleteById(id);
 	}
 
